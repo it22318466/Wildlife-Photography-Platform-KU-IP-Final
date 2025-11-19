@@ -50,7 +50,7 @@ const ContactModal = ({ opened, setOpened }) => {
 			opened={opened}
 			onClose={() => setOpened(false)}
 			closeOnClickOutside
-			size={"90rem"}
+			size={"82.5rem"}
 		>
 			<>
 				<div className="containerr">

@@ -79,7 +79,7 @@ const AddPropertyModal = ({ opened, setOpened, onComplete }) => {
 								setActiveStep={setActive}
 								onComplete={() => {
 									console.log("Collected property details:", propertyDetails);
-									if (onComplete) onComplete(propertyDetails);  // ✅ call parent
+									if (onComplete) onComplete(propertyDetails);  // call parent
 								}}
 							/>
 

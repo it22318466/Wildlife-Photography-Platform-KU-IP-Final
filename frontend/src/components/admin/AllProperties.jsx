@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Modal, Button, TextInput } from "@mantine/core";
+import Swal from "sweetalert2";
 
 const AllPropperties = () => {
   const [properties, setProperties] = useState([]);
@@ -20,7 +21,9 @@ const AllPropperties = () => {
 
   const handleLoadData = async () => {
     try {
-      const res = await axios.get("http://localhost:8000/api/residency/allresd");
+      const res = await axios.get(
+        "http://localhost:8000/api/residency/allresd"
+      );
       setProperties(res.data);
       console.log(res.data);
     } catch (err) {
@@ -30,14 +33,41 @@ const AllPropperties = () => {
 
   const handleDelete = async (id) => {
     try {
-      if (!window.confirm("Are you sure you want to delete this property?")) {
-        return;
-      }
+      const result = await Swal.fire({
+        title: "Are you sure?",
+        text: "Are you sure you want to delete this property?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#28a745", // green
+        cancelButtonColor: "#dc3545", // red
+        confirmButtonText: "Yes, delete it!",
+        cancelButtonText: "No, cancel!",
+      });
 
-      await axios.delete(`http://localhost:8000/api/residency/deleteresd/${id}`);
-      handleLoadData();
+      if (result.isConfirmed) {
+        await axios.delete(
+          `http://localhost:8000/api/residency/deleteresd/${id}`
+        );
+        await Swal.fire({
+          title: "Deleted!",
+          text: "Property has been deleted.",
+          icon: "success",
+        });
+        handleLoadData();
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        await Swal.fire({
+          title: "Cancelled",
+          text: "Property is safe.",
+          icon: "error",
+        });
+      }
     } catch (err) {
-      console.log(err);
+      console.error(err);
+      Swal.fire({
+        title: "Error",
+        text: "Could not delete property.",
+        icon: "error",
+      });
     }
   };
 
@@ -57,6 +87,15 @@ const AllPropperties = () => {
         formData
       );
 
+      // show success toast on submit
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "Property Updated Successfully !",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+
       setIsmodelOpened(false);
       setFormData({
         title: "",
@@ -69,6 +108,11 @@ const AllPropperties = () => {
       handleLoadData();
     } catch (err) {
       console.log(err);
+      Swal.fire({
+        title: "Error",
+        text: "Could not update property.",
+        icon: "error",
+      });
     }
   };
 
@@ -77,27 +121,53 @@ const AllPropperties = () => {
       <table className="w-full bg-white !rounded-xl">
         <thead>
           <tr>
-            <th className="px-4 py-3 text-left font-medium text-gray-700">ID</th>
-            <th className="px-4 py-3 text-left font-medium text-gray-700">Title</th>
-            <th className="px-4 py-3 text-left font-medium text-gray-700">Description</th>
-            <th className="px-4 py-3 text-left font-medium text-gray-700">Delete Time</th>
-            <th className="px-4 py-3 text-left font-medium text-gray-700">Country</th>
-            <th className="px-4 py-3 text-left font-medium text-gray-700">City</th>
-            <th className="px-4 py-3 text-left font-medium text-gray-700">Image</th>
-            <th className="px-4 py-3 text-left font-medium text-gray-700">Option</th>
+            <th className="px-4 py-3 text-left font-medium text-gray-700">
+              ID
+            </th>
+            <th className="px-4 py-3 text-left font-medium text-gray-700">
+              Title
+            </th>
+            <th className="px-4 py-3 text-left font-medium text-gray-700">
+              Description
+            </th>
+            <th className="px-4 py-3 text-left font-medium text-gray-700">
+              Validity Period
+            </th>
+            <th className="px-4 py-3 text-left font-medium text-gray-700">
+              Country
+            </th>
+            <th className="px-4 py-3 text-left font-medium text-gray-700">
+              Park
+            </th>
+            <th className="px-4 py-3 text-left font-medium text-gray-700">
+              Image
+            </th>
+            <th className="px-4 py-3 text-left font-medium text-gray-700">
+              Options
+            </th>
           </tr>
         </thead>
         <tbody>
           {properties.map((property) => (
-            <tr key={property?._id}>
-              <td className="border border-gray-300 px-4 py-2 text-sm">{property?._id}</td>
-              <td className="border border-gray-300 px-4 py-2 text-sm">{property?.title}</td>
-              <td className="border border-gray-300 px-4 py-2 text-sm">{property?.description}</td>
+            <tr key={property?._id} className="hover:bg-[#e2e2e2]">
+              <td className="border border-gray-300 px-4 py-2 text-sm">
+                {property?._id}
+              </td>
+              <td className="border border-gray-300 px-4 py-2 text-sm">
+                {property?.title}
+              </td>
+              <td className="border border-gray-300 px-4 py-2 text-sm">
+                {property?.description}
+              </td>
               <td className="border border-gray-300 px-4 py-2 text-sm">
                 {property?.price} Min
               </td>
-              <td className="border border-gray-300 px-4 py-2 text-sm">{property?.country}</td>
-              <td className="border border-gray-300 px-4 py-2 text-sm">{property?.city}</td>
+              <td className="border border-gray-300 px-4 py-2 text-sm">
+                {property?.country}
+              </td>
+              <td className="border border-gray-300 px-4 py-2 text-sm">
+                {property?.city}
+              </td>
               <td className="border border-gray-300 px-4 py-2 text-sm">
                 {property?.image && (
                   <img
@@ -146,40 +216,45 @@ const AllPropperties = () => {
         <div className="flex w-full flex-col gap-2 mt-4">
           <TextInput
             name="title"
-            label="Title"
+            label="Title :"
             placeholder="Enter title"
             value={formData.title}
             onChange={handleInputChange}
           />
           <TextInput
             name="description"
-            label="Description"
+            label="Description :"
             placeholder="Enter description"
             value={formData.description}
             onChange={handleInputChange}
           />
           <TextInput
             name="delete_time"
-            label="Delete time"
+            label="Validity Period :"
             placeholder="Enter delete time"
             value={formData.delete_time}
             onChange={handleInputChange}
           />
           <TextInput
             name="country"
-            label="Country"
+            label="Country :"
             placeholder="Enter country"
             value={formData.country}
             onChange={handleInputChange}
           />
           <TextInput
             name="city"
-            label="City"
+            label="Park :"
             placeholder="Enter city"
             value={formData.city}
             onChange={handleInputChange}
           />
-          <Button color="green" size="md" className="mt-3" onClick={handleUpdate}>
+          <Button
+            color="green"
+            size="md"
+            className="mt-3"
+            onClick={handleUpdate}
+          >
             Submit
           </Button>
         </div>
