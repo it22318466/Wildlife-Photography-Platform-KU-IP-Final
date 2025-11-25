@@ -175,7 +175,7 @@ input[type="email"],
   width: 200px;
   height: 45px;
   cursor: pointer;
-  background: #577c5d;
+  /* background: #577c5d; */
   position: fixed;
   right: 54px;
   border: none;
@@ -183,9 +183,9 @@ input[type="email"],
   text-transform: uppercase;
   border-radius: 7px;
   font-weight: 500;
-  &:hover {
+  /* &:hover {
     background: #466965;
-  }
+  } */
 }
 
 .textarea {

@@ -211,7 +211,7 @@ const ContactModal = ({ opened, setOpened }) => {
 							</div>
 							<div className="col">
 								<div className="form-group">
-									<button type="submit" className="button-send">
+									<button type="submit" className="button-send px-3 py-2 border rounded-md bg-green-50 btn-secondary rounded-full relative right-[0.33rem] width-200px">
 										Send Message
 									</button>
 								</div>
