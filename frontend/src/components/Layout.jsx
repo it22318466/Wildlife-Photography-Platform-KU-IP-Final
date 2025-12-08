@@ -71,8 +71,22 @@ const Layout = () => {
       ]);
     };
 
-    // Format chat history for API request
-    history = history.map(({ role, text }) => ({ role, parts: [{ text }] }));
+    // Format chat history for API request, including optional images
+    history = history.map(({ role, text, imageData, imageType }) => {
+      const parts = [];
+      if (text) {
+        parts.push({ text });
+      }
+      if (imageData) {
+        parts.push({
+          inlineData: {
+            data: imageData,
+            mimeType: imageType || "image/jpeg",
+          },
+        });
+      }
+      return { role, parts };
+    });
 
     const requestOptions = {
       method: "POST",

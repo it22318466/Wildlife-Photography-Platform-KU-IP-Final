@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
 const SideBar = ({ setSection }) => {
-  const [active, setActive] = useState("P");
+  const [active, setActive] = useState("D"); // Default to Dashboard tab
   const navigate = useNavigate();
 
   const handleChangeType = (type) => {
@@ -59,10 +59,19 @@ const SideBar = ({ setSection }) => {
       <div className="w-full mt-12 px-3 h-[90%] flex flex-col justify-between">
         <div className="w-full">
           <div
+            onClick={() => handleChangeType("D")}
+            style={{ backgroundColor: active === "D" ? "#4f860c" : "" }}
+            className="w-full h-[40px] bg-[#8AC343] flex justify-start text-white font-medium
+              items-center rounded-r-2xl cursor-pointer ps-2 mt-3"
+          >
+            Dashboard
+          </div>
+
+          <div
             onClick={() => handleChangeType("P")}
             style={{ backgroundColor: active === "P" ? "#4f860c" : "" }}
             className="w-full h-[40px] bg-[#8AC343] flex justify-start text-white font-medium
-              items-center rounded-r-2xl cursor-pointer ps-2"
+              items-center rounded-r-2xl cursor-pointer ps-2 mt-3"
           >
             All Properties
           </div>

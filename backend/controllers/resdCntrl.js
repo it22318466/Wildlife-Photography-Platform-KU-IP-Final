@@ -3,8 +3,19 @@ import Residency from "../models/Residency.js";
 import User from "../models/User.js";
 
 export const createResidency = asyncHandler(async (req, res) => {
-  const { title, description, price, address, country, city, facilities, image, userEmail } =
-    req.body.data || req.body;
+  const {
+    title,
+    description,
+    price,
+    address,
+    country,
+    city,
+    facilities,
+    image,
+    userEmail,
+    startTime,
+    endTime,
+  } = req.body.data || req.body;
 
   try {
     // const user = await User.findOne({ email: userEmail });
@@ -22,6 +33,8 @@ export const createResidency = asyncHandler(async (req, res) => {
       facilities,
       image,
       userEmail,
+      startTime,
+      endTime,
     });
 
     res.send({ message: "Residency created successfully", residency });
@@ -30,10 +43,26 @@ export const createResidency = asyncHandler(async (req, res) => {
   }
 });
 
-export const getAllResidencies = asyncHandler(async (req, res) => {
-  const residencies = await Residency.find().sort({ createdAt: -1 });
-  res.send(residencies);
-});
+export const getAllResidencies = async (req, res, next) => {
+  try {
+    const currentTime = new Date();
+    const currentHours = currentTime.getHours().toString().padStart(2, "0");
+    const currentMinutes = currentTime.getMinutes().toString().padStart(2, "0");
+    const currentTimeString = `${currentHours}:${currentMinutes}`;
+
+    // Find all residencies that haven't expired yet
+    const residencies = await Residency.find({
+      $or: [
+        { endTime: { $gte: currentTimeString } },
+        { endTime: { $exists: false } }, // For backward compatibility
+      ],
+    });
+
+    res.status(200).send(residencies);
+  } catch (err) {
+    next(err);
+  }
+};
 
 export const getResidency = asyncHandler(async (req, res) => {
   const { id } = req.params;
@@ -51,7 +80,7 @@ export const deleteResidency = asyncHandler(async (req, res) => {
 });
 
 export const updateResidency = asyncHandler(async (req, res) => {
-  const {id} = req.params;
+  const { id } = req.params;
   const { title, description, delete_time, country, city } = req.body;
   const residency = await Residency.findById(id);
   residency.title = title;
@@ -61,6 +90,4 @@ export const updateResidency = asyncHandler(async (req, res) => {
   residency.city = city;
   await residency.save();
   res.send({ message: "Residency updated successfully" });
-})
-
-
+});

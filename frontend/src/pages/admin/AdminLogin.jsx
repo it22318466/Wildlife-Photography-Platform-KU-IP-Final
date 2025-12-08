@@ -3,7 +3,7 @@ import adminImg from "../../assets/WildlifeAdmin.png";
 import Swal from "sweetalert2";
 
 const AdminLogin = () => {
-  const [formData, setFormData] = useState([
+  const [formData] = useState([
     {
       username: import.meta.env.VITE_ADMIN_EMAIL,
       password: import.meta.env.VITE_ADMIN_PASSWORD,
@@ -25,7 +25,7 @@ const AdminLogin = () => {
         timer: 2000,
         timerProgressBar: true,
       }).then(() => {
-        // Redirect AFTER popup closes
+        // Redirect to dashboard after successful login
         window.location.href = "/admin/dashboard";
       });
     } else {

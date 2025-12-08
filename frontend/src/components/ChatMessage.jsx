@@ -16,6 +16,13 @@ const ChatMessage = ({ chat }) => {
       <p className="message-text">
         {chat.isTyping ? <TypingIndicator /> : chat.text}
       </p>
+      {chat.imagePreview && (
+        <img
+          src={chat.imagePreview}
+          alt="Uploaded"
+          className="chat-image-preview"
+        />
+      )}
     </div>
   );
 };

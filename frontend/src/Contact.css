@@ -1,196 +1,238 @@
 @import url("https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.6.0/css/fontawesome.min.css");
+
 .containerr {
-  background: white;
+  background: #f8fafc;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   width: 100%;
-  height: 58vh;
+  min-height: 60vh;
+  padding: 40px 16px 48px;
+  gap: 10px;
+  overflow: hidden;
 }
 
 .containerr .h1 {
   text-align: center;
-  color: black;
-  font-size: 1.9rem;
-  margin-bottom: 6px;
-  margin-top: -0.5rem;
+  color: #111827;
+  font-size: 2rem;
+  margin-bottom: 1px;
 }
 
 .sub-title {
-  color: black;
+  color: #4b5563;
   text-align: center;
   font-size: 1rem;
-  margin-bottom: 6px;
+  margin-bottom: 16px;
+  max-width: 640px;
 }
 
 #contact-container {
-  width: 1300px;
-  border-radius: 15px;
+  display: flex;
+  align-items: stretch;
+  flex: 1;
+  width: 100%;
+  max-width: 1200px;
+  border-radius: 16px;
   overflow: hidden;
   display: flex;
-  padding: 10px;
-  background: #aaa9a7;
-  /* border: 1px solid #449cd2; */
-  height: 475px;
+  align-items: stretch;
+  padding: 16px;
+  background: #dee2e6;
+  gap: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
 }
 
 .contact-info {
   background-color: #2d4643;
-  border-radius: 15px;
-  flex: 0 1 40%;
-  padding: 20px;
+  border-radius: 12px;
+  flex: 1;
+  padding: 22px;
   color: white;
   display: flex;
   flex-direction: column;
+  min-width: 300px;
+  height: 580px;
 }
 
 .contact-info .p {
-  font-size: 0.9rem;
-  color: white;
-  font-weight: 300;
-  margin-bottom: 2rem;
+  font-size: 0.95rem;
+  color: #e5e7eb;
+  font-weight: 400;
+  margin-bottom: 1.5rem;
+  line-height: 1.5;
 }
 
 .contact-info .h4 {
-  font-size: 1.7rem;
-  font-weight: 500;
-  /* margin-bottom: 10rem; */
+  font-size: 1.6rem;
+  font-weight: 600;
   padding-bottom: 5px;
-  margin: 0;
+  margin: 0 0 6px 0;
 }
 
 .icon-text {
   display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  margin-bottom: 2rem;
+  gap: 8px;
+  align-items: baseline;
+  margin-bottom: 1rem;
   color: #05f7ff;
 }
 
 .icon-text .span {
-  font-size: 0.9rem;
-  font-weight: 300;
-  margin-left: 0.5rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.icon-text .value {
+  color: #e5e7eb;
+  font-weight: 400;
 }
 
 .social-media {
   display: flex;
-  justify-content: space-between;
-  width: 50%;
-  padding-top: 95px;
+  gap: 12px;
+  margin-top: auto;
 }
 
 .social-media .icon-circle {
-  flex: 0 1 40px;
-  display: flex;
+  width: 42px;
+  height: 42px;
+  display: inline-flex;
   justify-content: center;
   align-items: center;
   border-radius: 50%;
-  font-size: 25px;
-  height: 40px;
-  transition: 0.3s all ease-in-out;
-  &:hover {
-    background: #05f7ff;
-  }
+  font-size: 14px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  transition: 0.2s ease;
+}
+
+.social-media .icon-circle:hover {
+  background: #05f7ff;
+  color: #0b1f23;
 }
 
 .form {
-  padding: 40px;
+  padding: 28px;
   width: 100%;
+  background: #ebe7e7;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  gap: 18px;
 }
 
 .form .col {
   display: flex;
-  width: 105%;
-  flex: 0 0 100%;
+  gap: 16px;
+  width: 100%;
+  flex-wrap: wrap;
 }
 
 .form .form-group {
   display: flex;
   justify-content: flex-start;
   flex-direction: column;
-  flex: 0 1 100%;
-  padding-right: 40px;
+  flex: 1;
+  min-width: 220px;
+  gap: 6px;
 }
 
 .form .form-group .label {
-  font-size: 1rem;
-  color: white;
-  margin-bottom: 0.2rem;
+  font-size: 0.95rem;
+  color: #111827;
+  font-weight: 600;
 }
 
-.FIcon {
-  color: black;
-  margin-right: 4px;
-}
-
-.form .form-group .input[type="text"],
-input[type="tel"],
-input[type="email"],
+.form .form-group .input,
+.form .form-group .select,
 .textarea {
-  border: none;
-  cursor: pointer;
-  padding: 4px;
-  font-size: 0.9rem;
+  border: 1px solid #d1d5db;
+  background: #f9fafb;
+  padding: 10px 12px;
+  font-size: 0.90rem;
   font-weight: 400;
-  border-radius: 4px;
-  color: black;
-  margin-bottom: 0.8rem;
-  border-bottom: 2px solid rgba(255, 255, 255, 0.4);
-  &:focus {
-    outline: none;
-    border: none;
-    border-bottom: 2px solid #05f7ff;
+  border-radius: 8px;
+  color: #111827;
+  transition: border 0.15s ease, box-shadow 0.15s ease;
+}
+
+.form .form-group .input:focus,
+.form .form-group .select:focus,
+.textarea:focus {
+  outline: none;
+  border: 1px solid #8ac243;
+  box-shadow: 0 0 0 3px rgba(138, 194, 67, 0.2);
+  background: #fff;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: auto;
+}
+
+.button-send {
+  width: 100%;
+  max-width: 190px;
+  height: 43px;
+  cursor: pointer;
+  background: #8ac243;
+  border: none;
+  font-size: 0.5rem;
+  text-transform: uppercase;
+  border-radius: 8px;
+  font-weight: 500;
+  color: #0b1f23;
+  transition: background 0.2s ease, transform 0.1s ease;
+}
+
+.button-send:hover {
+  background: #79ae39;
+}
+
+.button-send:active {
+  transform: translateY(1px);
+}
+
+.textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+/* Responsive layouts */
+@media (max-width: 992px) {
+  #contact-container {
+    flex-direction: column;
+  }
+
+  .contact-info,
+  .form {
+    width: 100%;
   }
 }
 
-.radio-button input[type="radio"]:checked + label {
-  color: black;
-  font-weight: 500;
-}
+@media (max-width: 640px) {
+  .containerr {
+    padding: 32px 12px 56px;
+  }
 
-#radio-buttons {
-  display: flex;
-  justify-content: flex-start;
-}
+  #contact-container {
+    padding: 12px;
+  }
 
-.label-what {
-  margin-top: 0.9 rem;
-  margin-bottom: 0.2rem;
-  color: white;
-}
+  .form {
+    padding: 22px;
+  }
 
-.label-message {
-  margin-bottom: 0.6rem;
-  color: white;
-}
+  .form .col {
+    flex-direction: column;
+  }
 
-.form .radio-button {
-  margin-right: 20px;
-  margin-bottom: 1rem;
-}
-
-.form-group .button-send {
-  width: 200px;
-  height: 45px;
-  cursor: pointer;
-  /* background: #577c5d; */
-  position: fixed;
-  right: 54px;
-  border: none;
-  font-size: 0.9rem;
-  text-transform: uppercase;
-  border-radius: 7px;
-  font-weight: 500;
-  /* &:hover {
-    background: #466965;
-  } */
-}
-
-.textarea {
-  height: 90px;
-  bottom: 10px;
-  margin-bottom: 21px;
-  border-radius: 7px;
+  .button-send {
+    width: 100%;
+  }
 }

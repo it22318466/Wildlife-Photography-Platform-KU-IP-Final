@@ -37,6 +37,7 @@ const ContactModal = ({ opened, setOpened }) => {
 		}).then((res) => res.json());
 
 		if (res.success) {
+			event.target.reset();
 			Swal.fire({
 				title: "Message sent successfully!",
 				text: "Thank you very much for joining us.",
@@ -50,7 +51,7 @@ const ContactModal = ({ opened, setOpened }) => {
 			opened={opened}
 			onClose={() => setOpened(false)}
 			closeOnClickOutside
-			size={"82.5rem"}
+			size={"80rem"}
 		>
 			<>
 				<div className="containerr">

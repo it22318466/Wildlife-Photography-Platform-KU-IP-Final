@@ -79,7 +79,7 @@ const AllBookings = () => {
 
     return (
         <div className="w-full mt-4">
-            <h2 className="text-2xl font-bold mb-4">All Bookings by User</h2>
+            {/* <h2 className="text-2xl font-bold mb-4">All Bookings by User</h2> */}
             
             {bookingsData.length === 0 ? (
                 <div className="text-center py-8 text-gray-500">

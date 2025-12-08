@@ -15,6 +15,7 @@ import Profile from "./pages/Profile";
 import Information from "./pages/Information";
 import AdminLogin from "./pages/admin/AdminLogin";
 import Dashboard from "./pages/admin/Dashboard";
+import AdminProfile from "./pages/admin/AdminProfile";
 
 export default function App() {
   const queryClient = new QueryClient();
@@ -44,10 +45,14 @@ export default function App() {
 
               {/* ADMIN */}
               <Route path="/admin">
-			  	<Route index element={<AdminLogin />} />
-				<Route path="dashboard" element={<Dashboard/>} />
-				<Route path="properties" element={<div>Admin Properties</div>} />
-			  </Route>
+                <Route index element={<AdminLogin />} />
+                <Route path="dashboard" element={<Dashboard />} />
+                <Route path="profile" element={<AdminProfile />} />
+                <Route
+                  path="properties"
+                  element={<div>Admin Properties</div>}
+                />
+              </Route>
             </Routes>
           </Suspense>
         </BrowserRouter>
